@@ -1,0 +1,75 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Utils:
+    - Vaultwarden:
+        icon: bitwarden.png
+        href: https://vault.gl1tch.art/
+        description: Self-hosted password manager
+        siteMonitor: https://vault.gl1tch.art/
+        statusStyle: "dot"
+    - Miniflux:
+        icon: miniflux.png
+        href: https://feed.gl1tch.art/
+        description: Self-hosted RSS feed reader
+        siteMonitor: http://nas:8082/
+        statusStyle: "dot"
+    - Baikal:
+        icon: baikal.png
+        href: https://dav.gl1tch.art/
+        description: Cal-DAV and Card-DAV server
+        siteMonitor: https://dav.gl1tch.art/
+        statusStyle: "dot"
+    - Microbin:
+        icon: microbin.png
+        href: https://bin.gl1tch.art/
+        description: Pastebin and file sharing service
+        siteMonitor: http://nas:8080/
+        statusStyle: "dot"
+    - Memos:
+        icon: memos.png
+        href: https://memos.gl1tch.art/
+        description: Lightweight note-taking service
+        siteMonitor: http://nas:5230/
+        statusStyle: "dot"
+    - Paperless:
+        icon: paperless.png
+        href: https://docs.gl1tch.art/
+        description: Private repository for scanned docs with OCR and full text search
+        siteMonitor: http://nas:8000/
+        statusStyle: "dot"
+
+- Media:
+    - Jellyfin:
+        icon: jellyfin.png
+        href: https://media.gl1tch.art/
+        siteMonitor: http://nas:8096
+        statusStyle: "dot"
+        description: Photos, Movies, Music & TV
+    - qBittorrent:
+        icon: qbittorrent.png
+        href: https://qb.gl1tch.art/
+        description: qBittorrent server
+        siteMonitor: http://nas:8081
+        statusStyle: "dot"
+
+- Private:
+    - TrueNAS:
+        icon: truenas-scale.png
+        href: https://nas:5001
+        siteMonitor: http://nas:5000
+        statusStyle: "dot"
+        description: TrueNAS Admin Console
+    - Files:
+        icon: filebrowser.png
+        href: http://nas:30051
+        siteMonitor: http://nas:30051
+        statusStyle: "dot"
+        description: NAS File Browser
+    - Immich:
+        icon: immich.png
+        href: http://nas:2283
+        siteMonitor: http://nas:2283
+        statusStyle: "dot"
+        description: Personal Image Storage

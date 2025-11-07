@@ -1,0 +1,31 @@
+CREATE DATABASE paperless;
+CREATE DATABASE immich;
+CREATE DATABASE miniflux;
+
+CREATE USER paperless WITH ENCRYPTED PASSWORD 'pass';
+CREATE USER immich WITH ENCRYPTED PASSWORD 'pass';
+CREATE USER miniflux WITH ENCRYPTED PASSWORD 'pass';
+
+GRANT ALL PRIVILEGES ON DATABASE paperless TO paperless;
+GRANT ALL PRIVILEGES ON DATABASE immich TO immich;
+GRANT ALL PRIVILEGES ON DATABASE miniflux TO miniflux;
+
+ALTER DATABASE paperless OWNER TO paperless;
+GRANT ALL PRIVILEGES ON DATABASE paperless TO paperless;
+\c paperless
+ALTER SCHEMA public OWNER TO paperless;
+GRANT ALL ON SCHEMA public TO paperless;
+
+ALTER DATABASE immich OWNER TO immich;
+GRANT ALL PRIVILEGES ON DATABASE immich TO immich;
+\c immich
+ALTER SCHEMA public OWNER TO immich;
+GRANT ALL ON SCHEMA public TO immich;
+CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
+CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
+
+ALTER DATABASE miniflux OWNER TO miniflux;
+GRANT ALL PRIVILEGES ON DATABASE miniflux TO miniflux;
+\c miniflux
+ALTER SCHEMA public OWNER TO miniflux;
+GRANT ALL ON SCHEMA public TO miniflux;

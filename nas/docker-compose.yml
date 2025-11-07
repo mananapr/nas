@@ -1,0 +1,145 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_MAIN_DB}
+      - POSTGRES_INITDB_ARGS='--data-checksums'
+      - DB_STORAGE_TYPE=HDD
+    ports:
+      - "5432:5432"
+    volumes:
+      - /mnt/home/docker/postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+
+  microbin:
+    image: danielszabo99/microbin:latest
+    container_name: microbin
+    environment:
+      - MICROBIN_PORT=8080
+      - MICROBIN_PRIVATE=true
+      - MICROBIN_READONLY=true
+      - MICROBIN_UPLOADER_PASSWORD=${MICROBIN_UPLOADER_PASSWORD}
+      - MICROBIN_EDITABLE=false
+      - MICROBIN_TITLE=Microbin
+    ports:
+      - "8080:8080"
+    volumes:
+      - /mnt/home/docker/microbin:/app/microbin_data
+    restart: unless-stopped
+
+  paperless-ngx:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - PAPERLESS_REDIS=redis://redis:6379
+      - PAPERLESS_DBHOST=postgres
+      - PAPERLESS_DBNAME=${PAPERLESS_DB}
+      - PAPERLESS_DBUSER=${PAPERLESS_DB_USER}
+      - PAPERLESS_DBPASS=${PAPERLESS_DB_PASS}
+      - PAPERLESS_TIME_ZONE=${TZ}
+      - PAPERLESS_URL=https://docs.gl1tch.art
+    ports:
+      - "8000:8000"
+    volumes:
+      - /mnt/home/docker/paperless/data:/usr/src/paperless/data
+      - /mnt/home/docker/paperless/media:/usr/src/paperless/media
+      - /mnt/home/docker/paperless/export:/usr/src/paperless/export
+      - /mnt/home/docker/paperless/consume:/usr/src/paperless/consume
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=${TZ}
+      - WEBUI_PORT=8081
+    volumes:
+      - /mnt/home/docker/qbittorrent/config:/config
+      - /mnt/home/video:/downloads
+    ports:
+      - "8081:8081"
+      - "6881:6881"
+      - "6881:6881/udp"
+    restart: unless-stopped
+
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - /mnt/home/docker/jellyfin/config:/config
+      - /mnt/home/docker/jellyfin/cache:/cache
+      - /mnt/home/video:/media/video
+      - /mnt/home/music:/media/music
+      - /mnt/home/photo:/media/photo
+    ports:
+      - "8096:8096"
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    container_name: immich_server
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DB_HOSTNAME=postgres
+      - DB_USERNAME=${IMMICH_DB_USER}
+      - DB_PASSWORD=${IMMICH_DB_PASS}
+      - DB_DATABASE_NAME=${IMMICH_DB}
+      - REDIS_HOSTNAME=redis
+    volumes:
+      - /mnt/home/docker/immich/upload:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "2283:2283"
+    restart: unless-stopped
+
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
+    container_name: immich_machine_learning
+    restart: unless-stopped
+    depends_on:
+      - immich-server
+    volumes:
+      - /mnt/home/docker/immich/ml-cache:/cache
+
+  miniflux:
+    image: miniflux/miniflux:latest
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgres://${MINIFLUX_DB_USER}:${MINIFLUX_DB_PASS}@postgres/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=${MINIFLUX_ADMIN_USER}
+      - ADMIN_PASSWORD=${MINIFLUX_ADMIN_PASS}
+
+  memos:
+    image: neosmemo/memos:stable
+    container_name: memos
+    volumes:
+      - /mnt/home/docker/memos:/var/opt/memos
+    ports:
+      - 5230:5230

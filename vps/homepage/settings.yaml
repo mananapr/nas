@@ -1,0 +1,16 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+title: NAS Homepage
+description: Links to my self-hosted services
+theme: dark
+cardBlur: xs
+headerStyle: clean
+# background:
+#   image: /images/gruvbox_spac.jpg
+#   blur: sm
+#   saturate: 50
+#   brightness: 50
+#   opacity: 50
+
