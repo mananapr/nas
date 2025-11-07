@@ -1,0 +1,55 @@
+gl1tch.art {
+    handle {
+        reverse_proxy localhost:3000
+    }
+}
+
+vault.gl1tch.art {
+    handle {
+        reverse_proxy localhost:9090
+    }
+}
+
+dav.gl1tch.art {
+    handle {
+        reverse_proxy localhost:8006
+    }
+}
+
+feed.gl1tch.art {
+    handle {
+        reverse_proxy nas:8082
+    }
+}
+
+memos.gl1tch.art {
+    handle {
+        reverse_proxy nas:5230
+    }
+}
+
+media.gl1tch.art {
+    handle {
+        reverse_proxy nas:8096
+    }
+}
+
+qb.gl1tch.art {
+    handle {
+        reverse_proxy nas:8081
+    }
+}
+
+bin.gl1tch.art {
+    handle {
+        reverse_proxy nas:8080
+    }
+}
+
+docs.gl1tch.art {
+    handle {
+        reverse_proxy nas:8000 {
+            header_down Referrer-Policy "strict-origin-when-cross-origin"
+        }
+    }
+}
