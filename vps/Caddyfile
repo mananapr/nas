@@ -22,6 +22,12 @@ feed.gl1tch.art {
     }
 }
 
+vpn.gl1tch.art {
+    handle {
+        reverse_proxy localhost:8080
+    }
+}
+
 memos.gl1tch.art {
     handle {
         reverse_proxy nas:5230

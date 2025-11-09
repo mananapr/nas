@@ -36,6 +36,17 @@ services:
     environment:
         HOMEPAGE_ALLOWED_HOSTS: gl1tch.art
 
+  headscale:
+    image: docker.io/headscale/headscale:v0.26.1
+    command: serve
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./headscale:/etc/headscale
+      - headscale-data:/var/lib/headscale
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+
   backup:
     image: offen/docker-volume-backup:latest
     restart: unless-stopped
@@ -53,9 +64,11 @@ services:
       - vw-data:/backup/vw-data
       - baikal-config:/backup/baikal-config
       - baikal-data:/backup/baikal-data
+      - headscale-data:/backup/headscale-data
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
 volumes:
   vw-data:
   baikal-config:
   baikal-data:
+  headscale-data:
