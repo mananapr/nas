@@ -4,6 +4,12 @@ gl1tch.art {
     }
 }
 
+img.gl1tch.art {
+    handle {
+        reverse_proxy nas:3000
+    }
+}
+
 vault.gl1tch.art {
     handle {
         reverse_proxy localhost:9090
