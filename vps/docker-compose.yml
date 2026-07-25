@@ -37,7 +37,7 @@ services:
         HOMEPAGE_ALLOWED_HOSTS: gl1tch.art
 
   headscale:
-    image: docker.io/headscale/headscale:v0.26.1
+    image: docker.io/headscale/headscale:v0.29.2
     command: serve
     ports:
       - "127.0.0.1:8080:8080"
@@ -59,7 +59,7 @@ services:
       AWS_SECRET_ACCESS_KEY: ${B2_KEY}
       AWS_ENDPOINT: ${B2_ENDPOINT}
       AWS_S3_BUCKET_NAME: ${B2_BUCKET}
-      AWS_S3_PATH: "docker"
+      AWS_S3_PATH: "vps-docker"
     volumes:
       - vw-data:/backup/vw-data
       - baikal-config:/backup/baikal-config
