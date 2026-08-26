@@ -58,6 +58,12 @@ bin.gl1tch.art {
     }
 }
 
+files.gl1tch.art {
+    handle {
+        reverse_proxy nas:3923
+    }
+}
+
 docs.gl1tch.art {
     handle {
         reverse_proxy nas:8000 {

@@ -160,3 +160,20 @@ services:
       test: curl -s http://localhost:3000/share/healthcheck -o /dev/null || exit 1
       start_period: 10s
       timeout: 5s
+
+  copyparty:
+    image: copyparty/ac:latest
+    container_name: copyparty
+    environment:
+      - TZ=${TZ}
+    ports:
+      - "3923:3923"
+    volumes:
+      - /mnt/home/docker/copyparty:/cfg
+      - /mnt/home/video:/files/video
+      - /mnt/home/music:/files/music
+      - /mnt/home/photo:/files/photo
+    command:
+      - "-a"
+      - "${COPYPARTY_USER}:${COPYPARTY_PASSWORD}"
+    restart: unless-stopped
