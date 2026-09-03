@@ -57,19 +57,19 @@
 - Private:
     - TrueNAS:
         icon: truenas-scale.png
-        href: https://nas:5001
+        href: https://nas.gl1tch.art
         siteMonitor: http://nas:5000
         statusStyle: "dot"
         description: TrueNAS Admin Console
     - Files:
         icon: filebrowser.png
-        href: http://nas:30051
+        href: https://files.gl1tch.art
         siteMonitor: http://nas:30051
         statusStyle: "dot"
         description: NAS File Browser
     - Immich:
         icon: immich.png
-        href: http://nas:2283
+        href: https://immich.gl1tch.art
         siteMonitor: http://nas:2283
         statusStyle: "dot"
         description: Personal Image Storage

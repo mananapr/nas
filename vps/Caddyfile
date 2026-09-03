@@ -6,7 +6,7 @@ gl1tch.art {
 
 img.gl1tch.art {
     handle {
-        reverse_proxy nas:3000
+        reverse_proxy {$NAS_TAILNET_IP}:3000
     }
 }
 
@@ -22,51 +22,119 @@ dav.gl1tch.art {
     }
 }
 
-feed.gl1tch.art {
-    handle {
-        reverse_proxy nas:8082
-    }
-}
-
 vpn.gl1tch.art {
     handle {
         reverse_proxy localhost:8080
     }
 }
 
-memos.gl1tch.art {
-    handle {
-        reverse_proxy nas:5230
-    }
-}
-
 media.gl1tch.art {
     handle {
-        reverse_proxy nas:8096
-    }
-}
-
-qb.gl1tch.art {
-    handle {
-        reverse_proxy nas:8081
+        reverse_proxy {$NAS_TAILNET_IP}:8096
     }
 }
 
 bin.gl1tch.art {
     handle {
-        reverse_proxy nas:8080
+        reverse_proxy {$NAS_TAILNET_IP}:8080
+    }
+}
+
+feed.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NAS_TAILNET_IP}:8082
+    }
+}
+
+memos.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NAS_TAILNET_IP}:5230
+    }
+}
+
+qb.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NAS_TAILNET_IP}:8081
     }
 }
 
 files.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
     handle {
-        reverse_proxy nas:3923
+        reverse_proxy {$NAS_TAILNET_IP}:3923
+    }
+}
+
+nas.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NAS_TAILNET_IP}:5000
+    }
+}
+
+immich.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NAS_TAILNET_IP}:2283
     }
 }
 
 docs.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
     handle {
-        reverse_proxy nas:8000 {
+        reverse_proxy {$NAS_TAILNET_IP}:8000 {
             header_down Referrer-Policy "strict-origin-when-cross-origin"
         }
     }

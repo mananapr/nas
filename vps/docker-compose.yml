@@ -47,6 +47,24 @@ services:
     labels:
       - docker-volume-backup.stop-during-backup=true
 
+  caddy:
+    build:
+      context: ./caddy
+    container_name: caddy
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      NAS_TAILNET_IP: ${NAS_TAILNET_IP}
+      NAMECHEAP_API_USER: ${NAMECHEAP_API_USER}
+      NAMECHEAP_API_KEY: ${NAMECHEAP_API_KEY}
+      NAMECHEAP_CLIENT_IP: ${NAMECHEAP_CLIENT_IP}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+
   backup:
     image: offen/docker-volume-backup:latest
     restart: unless-stopped
@@ -65,6 +83,8 @@ services:
       - baikal-config:/backup/baikal-config
       - baikal-data:/backup/baikal-data
       - headscale-data:/backup/headscale-data
+      - caddy-data:/backup/caddy-data
+      - caddy-config:/backup/caddy-config
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
 volumes:
@@ -72,3 +92,5 @@ volumes:
   baikal-config:
   baikal-data:
   headscale-data:
+  caddy-data:
+  caddy-config:
