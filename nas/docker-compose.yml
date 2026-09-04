@@ -137,13 +137,13 @@ services:
       - ADMIN_USERNAME=${MINIFLUX_ADMIN_USER}
       - ADMIN_PASSWORD=${MINIFLUX_ADMIN_PASS}
 
-  memos:
-    image: neosmemo/memos:stable
-    container_name: memos
+  trilium:
+    image: triliumnext/trilium:latest
+    container_name: trilium
     volumes:
-      - /mnt/home/docker/memos:/var/opt/memos
+      - /mnt/home/docker/memos:/home/node/trilium-data
     ports:
-      - 5230:5230
+      - 5230:8080
 
   immich-public-proxy:
     image: alangrainger/immich-public-proxy:latest

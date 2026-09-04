@@ -27,10 +27,10 @@
         description: Pastebin and file sharing service
         siteMonitor: http://nas:8080/
         statusStyle: "dot"
-    - Memos:
-        icon: memos.png
+    - TriliumNext:
+        icon: trilium.png
         href: https://memos.gl1tch.art/
-        description: Lightweight note-taking service
+        description: Personal knowledge base and note-taking service
         siteMonitor: http://nas:5230/
         statusStyle: "dot"
     - Paperless:
