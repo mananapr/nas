@@ -140,6 +140,7 @@ services:
   trilium:
     image: triliumnext/trilium:latest
     container_name: trilium
+    restart: unless-stopped
     volumes:
       - /mnt/home/docker/memos:/home/node/trilium-data
     ports:
