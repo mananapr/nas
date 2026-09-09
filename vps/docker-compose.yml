@@ -47,6 +47,20 @@ services:
     labels:
       - docker-volume-backup.stop-during-backup=true
 
+  soju:
+    build:
+      context: ./soju
+    container_name: soju
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6667:6667"
+    volumes:
+      - ./soju:/etc/soju:ro
+      - soju-data:/var/lib/soju
+    command: ["-config", "/etc/soju/soju.conf"]
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+
   caddy:
     build:
       context: ./caddy
@@ -83,6 +97,7 @@ services:
       - baikal-config:/backup/baikal-config
       - baikal-data:/backup/baikal-data
       - headscale-data:/backup/headscale-data
+      - soju-data:/backup/soju-data
       - caddy-data:/backup/caddy-data
       - caddy-config:/backup/caddy-config
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -92,5 +107,6 @@ volumes:
   baikal-config:
   baikal-data:
   headscale-data:
+  soju-data:
   caddy-data:
   caddy-config:

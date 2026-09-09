@@ -30,6 +30,9 @@ services: {}
 cp .env.example .env
 docker compose up -d
 
+# create the first Soju account
+docker compose exec soju sojuctl -config /etc/soju/soju.conf user create -username your-user -password your-password -admin
+
 # restore backblaze docker volume backups
 docker run --rm -v apps_baikal-config:/target -v ~/baikal_config:/source busybox cp -a /source/. /target/
 docker run --rm -v apps_baikal-data:/target -v ~/baikal_data:/source busybox cp -a /source/. /target/

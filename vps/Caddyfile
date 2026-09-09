@@ -1,3 +1,23 @@
+{
+    layer4 {
+        tcp/:6697 {
+            @irc tls sni irc.gl1tch.art
+            route @irc {
+                tls {
+                    connection_policy {
+                        alpn irc
+                    }
+                }
+                proxy tcp/127.0.0.1:6667
+            }
+        }
+    }
+}
+
+irc.gl1tch.art {
+    respond "IRC bouncer" 200
+}
+
 gl1tch.art {
     handle {
         reverse_proxy localhost:3000
