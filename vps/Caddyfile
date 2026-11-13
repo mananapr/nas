@@ -31,12 +31,28 @@ img.gl1tch.art {
 }
 
 vault.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
     handle {
         reverse_proxy localhost:9090
     }
 }
 
 dav.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
     handle {
         reverse_proxy localhost:8006
     }
@@ -157,5 +173,47 @@ docs.gl1tch.art {
         reverse_proxy {$NAS_TAILNET_IP}:8000 {
             header_down Referrer-Policy "strict-origin-when-cross-origin"
         }
+    }
+}
+
+home.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NUC_TAILNET_IP}:8123
+    }
+}
+
+music.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NUC_TAILNET_IP}:8095
+    }
+}
+
+nuc.gl1tch.art {
+    tls {
+        dns namecheap {
+            api_key {$NAMECHEAP_API_KEY}
+            user {$NAMECHEAP_API_USER}
+            client_ip {$NAMECHEAP_CLIENT_IP}
+        }
+    }
+
+    handle {
+        reverse_proxy {$NUC_TAILNET_IP}:5000
     }
 }

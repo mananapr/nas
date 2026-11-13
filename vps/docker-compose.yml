@@ -69,6 +69,7 @@ services:
     restart: unless-stopped
     environment:
       NAS_TAILNET_IP: ${NAS_TAILNET_IP}
+      NUC_TAILNET_IP: ${NUC_TAILNET_IP}
       NAMECHEAP_API_USER: ${NAMECHEAP_API_USER}
       NAMECHEAP_API_KEY: ${NAMECHEAP_API_KEY}
       NAMECHEAP_CLIENT_IP: ${NAMECHEAP_CLIENT_IP}

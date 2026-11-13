@@ -47,6 +47,12 @@
         siteMonitor: http://nas:8096
         statusStyle: "dot"
         description: Photos, Movies, Music & TV
+    - MusicAssistant:
+        icon: music-assistant.png
+        href: https://music.gl1tch.art/
+        siteMonitor: http://nuc:8095
+        statusStyle: "dot"
+        description: Multi-room Audio
     - qBittorrent:
         icon: qbittorrent.png
         href: https://qb.gl1tch.art/
@@ -61,10 +67,16 @@
         siteMonitor: http://nas:5000
         statusStyle: "dot"
         description: TrueNAS Admin Console
+    - NUC:
+        icon: casaos.png
+        href: https://nuc.gl1tch.art
+        siteMonitor: http://nuc:5000
+        statusStyle: "dot"
+        description: CasaOS Console for NUC
     - Files:
-        icon: filebrowser.png
+        icon: copyparty.png
         href: https://files.gl1tch.art
-        siteMonitor: http://nas:30051
+        siteMonitor: http://nas:3923
         statusStyle: "dot"
         description: NAS File Browser
     - Immich:
@@ -73,3 +85,9 @@
         siteMonitor: http://nas:2283
         statusStyle: "dot"
         description: Personal Image Storage
+    - HomeAssistant:
+        icon: home-assistant.png
+        href: https://home.gl1tch.art
+        siteMonitor: http://nuc:8123
+        statusStyle: "dot"
+        description: Home Automation
