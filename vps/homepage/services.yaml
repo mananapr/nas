@@ -47,12 +47,6 @@
         siteMonitor: http://nas:8096
         statusStyle: "dot"
         description: Photos, Movies, Music & TV
-    - MusicAssistant:
-        icon: music-assistant.png
-        href: https://music.gl1tch.art/
-        siteMonitor: http://nuc:8095
-        statusStyle: "dot"
-        description: Multi-room Audio
     - qBittorrent:
         icon: qbittorrent.png
         href: https://qb.gl1tch.art/

@@ -190,20 +190,6 @@ home.gl1tch.art {
     }
 }
 
-music.gl1tch.art {
-    tls {
-        dns namecheap {
-            api_key {$NAMECHEAP_API_KEY}
-            user {$NAMECHEAP_API_USER}
-            client_ip {$NAMECHEAP_CLIENT_IP}
-        }
-    }
-
-    handle {
-        reverse_proxy {$NUC_TAILNET_IP}:8095
-    }
-}
-
 nuc.gl1tch.art {
     tls {
         dns namecheap {
