@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   postgres:
-    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
+    image: ghcr.io/immich-app/postgres:18-vectorchord1.1.1-pgvector0.8.7
     container_name: postgres
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
 
   microbin:
-    image: danielszabo99/microbin:latest
+    image: danielszabo99/microbin:2.1.4
     container_name: microbin
     environment:
       - MICROBIN_PORT=8080
@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
 
   paperless-ngx:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.5.1
     container_name: paperless
     depends_on:
       - postgres
@@ -62,7 +62,7 @@ services:
     restart: unless-stopped
 
   qbittorrent:
-    image: linuxserver/qbittorrent:latest
+    image: linuxserver/qbittorrent:5.3.0
     container_name: qbittorrent
     environment:
       - PUID=568
@@ -79,10 +79,12 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: jellyfin/jellyfin:latest
+    image: jellyfin/jellyfin:12.4
     container_name: jellyfin
     environment:
       - TZ=${TZ}
+    group_add:
+      - '107'
     volumes:
       - /mnt/home/docker/jellyfin/config:/config
       - /mnt/home/docker/jellyfin/cache:/cache
@@ -96,7 +98,7 @@ services:
     restart: unless-stopped
 
   immich-server:
-    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    image: ghcr.io/immich-app/immich-server:v3.4.2
     container_name: immich_server
     depends_on:
       - postgres
@@ -115,7 +117,7 @@ services:
     restart: unless-stopped
 
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
+    image: ghcr.io/immich-app/immich-machine-learning:v3.4.2
     container_name: immich_machine_learning
     restart: unless-stopped
     depends_on:
@@ -124,7 +126,7 @@ services:
       - /mnt/home/docker/immich/ml-cache:/cache
 
   miniflux:
-    image: miniflux/miniflux:latest
+    image: miniflux/miniflux:2.3.5
     restart: unless-stopped
     ports:
       - "8082:8080"
@@ -138,7 +140,7 @@ services:
       - ADMIN_PASSWORD=${MINIFLUX_ADMIN_PASS}
 
   trilium:
-    image: triliumnext/trilium:latest
+    image: triliumnext/trilium:v0.107.0
     container_name: trilium
     restart: unless-stopped
     volumes:
@@ -147,7 +149,7 @@ services:
       - 5230:8080
 
   immich-public-proxy:
-    image: alangrainger/immich-public-proxy:latest
+    image: alangrainger/immich-public-proxy:4.2.0
     container_name: immich-public-proxy
     restart: always
     ports:
@@ -163,7 +165,7 @@ services:
       timeout: 5s
 
   copyparty:
-    image: copyparty/ac:latest
+    image: copyparty/ac:1.20.26
     container_name: copyparty
     environment:
       - TZ=${TZ}
