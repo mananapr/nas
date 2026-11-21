@@ -30,6 +30,12 @@ img.gl1tch.art {
     }
 }
 
+beszel.gl1tch.art {
+    handle {
+        reverse_proxy localhost:8090
+    }
+}
+
 vault.gl1tch.art {
     tls {
         dns namecheap {

@@ -81,6 +81,32 @@ services:
     labels:
       - docker-volume-backup.stop-during-backup=true
 
+  beszel:
+    image: henrygd/beszel:0.21.2
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8090:8090"
+    environment:
+      APP_URL: https://beszel.gl1tch.art
+      DISABLE_SSH: "true"
+    volumes:
+      - beszel-data:/beszel_data
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+
+  beszel-agent:
+    image: henrygd/beszel-agent:0.21.2
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      KEY: ${BESZEL_KEY}
+      TOKEN: ${BESZEL_TOKEN}
+      HUB_URL: https://beszel.gl1tch.art
+      DISABLE_SSH: "true"
+    volumes:
+      - beszel-agent-data:/var/lib/beszel-agent
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
   backup:
     image: offen/docker-volume-backup:v2.50.1
     restart: unless-stopped
@@ -102,6 +128,7 @@ services:
       - soju-data:/backup/soju-data
       - caddy-data:/backup/caddy-data
       - caddy-config:/backup/caddy-config
+      - beszel-data:/backup/beszel-data
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
 volumes:
@@ -112,3 +139,5 @@ volumes:
   soju-data:
   caddy-data:
   caddy-config:
+  beszel-data:
+  beszel-agent-data:

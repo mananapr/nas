@@ -79,6 +79,12 @@
         siteMonitor: http://nas:2283
         statusStyle: "dot"
         description: Personal Image Storage
+    - Beszel:
+        icon: beszel.png
+        href: https://beszel.gl1tch.art
+        siteMonitor: https://beszel.gl1tch.art
+        statusStyle: "dot"
+        description: Observability & Monitoring
     - HomeAssistant:
         icon: home-assistant.png
         href: https://home.gl1tch.art

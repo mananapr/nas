@@ -180,3 +180,28 @@ services:
       - "-a"
       - "${COPYPARTY_USER}:${COPYPARTY_PASSWORD}"
     restart: unless-stopped
+
+  beszel-agent:
+    image: henrygd/beszel-agent:0.21.2-alpine
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      KEY: ${BESZEL_KEY}
+      TOKEN: ${BESZEL_TOKEN}
+      HUB_URL: https://beszel.gl1tch.art
+      DISABLE_SSH: "true"
+      SMART_INTERVAL: 1h
+      ZFS_INTERVAL: 1h
+      SMART_DEVICES: /dev/sda,/dev/sdb,/dev/sdc,/dev/sdd
+    volumes:
+      - /mnt/home/docker/beszel-agent:/var/lib/beszel-agent
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    devices:
+      - /dev/zfs:/dev/zfs
+      - /dev/sda:/dev/sda
+      - /dev/sdb:/dev/sdb
+      - /dev/sdc:/dev/sdc
+      - /dev/sdd:/dev/sdd
+    cap_add:
+      - SYS_RAWIO
+      - SYS_ADMIN
