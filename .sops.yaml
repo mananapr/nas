@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: ^(nas|vps)/.env$
+    age:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKJX1rsrhm2fFi9qf88yRiplKaK/HcXktpwtnkwW5Trk

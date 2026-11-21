@@ -27,7 +27,6 @@ services: {}
 ### vps
 
 ```bash
-cp .env.example .env
 docker compose up -d
 
 # create the first Soju account
